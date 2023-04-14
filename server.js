@@ -7,9 +7,11 @@ const connectToDB=require("./config/database");
 const app=express();
 const PORT=3000;
 
-//*  setting the middleware
+//*  setting the views
 app.set("view engine", "jsx");
 app.engine("jsx", require("jsx-view-engine").createEngine());
+
+//* body parser
 app.use((req, res, next) => {
     console.log("I run for all routes");
     next();

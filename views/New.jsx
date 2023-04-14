@@ -5,7 +5,7 @@ return(
 <div>
     <form action="/logs" method="POST">
       Title:  < input type="text" name="title"/><br/>
-      Entry:  < input type="text" name="entry"/><br/>
+      Entry:  <textarea name="entry" cols="30" rows="5"></textarea>
       Is shipIsBroken: <input type="checkbox" name="shipIsBroken"/>
             <br/>
             <input type="submit" value="Create new ship"/>
