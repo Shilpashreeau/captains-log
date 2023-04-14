@@ -25,12 +25,17 @@ app.get("/new",(req,res)=>{
 res.render('New');
 })
 /**
- * GET /logs
+ * /create route
  */
 
-// app.get("/logs",(req,res)=>{
-
-// })
+app.post("/logs",(req,res)=>{
+    if (req.body.shipIsBroken === "on") {
+        req.body.shipIsBroken = true;
+      } else {
+        req.body.shipIsBroken = false;
+      }
+    res.send(req.body);
+})
 
 app.listen(PORT,()=>{
 
