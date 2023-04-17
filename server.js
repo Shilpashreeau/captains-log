@@ -19,7 +19,10 @@ app.use((req, res, next) => {
   app.use(express.urlencoded({ extended: false }));
 
 
+app.get("/",(req,res)=>{
 
+res.send("<h1>Welcome</h1>")
+})
 
 
 /**
@@ -31,7 +34,8 @@ app.use((req, res, next) => {
   app.get("/logs", (req, res) => {
 
     Log.find({},(error,allLogs)=>{
-    res.render('Index',{logs:allLogs})//{} empty objects retrieves all the data from db
+      //  res.send("index");
+    res.render("Index",{logs:allLogs})//{} empty objects retrieves all the data from db
     })
   });
 
@@ -58,6 +62,39 @@ app.post("/logs",(req,res)=>{
 
     res.render('New');
     })
+
+    //*Seed Route
+app.get('/logs/seed', (req, res)=>{
+  Log.create([
+      {
+        title:'grapefruit',
+        entry:'pink',
+        shipIsBroken:true
+      },
+      {
+        title:'grape',
+        entry:'purple',
+        shipIsBroken:false
+      },
+      {
+        title:'avocado',
+        entry:'green',
+        shipIsBroken:true
+      }
+  ], (err, data)=>{
+      res.redirect('/logs');
+  })
+});
+/**
+ * Show Route:(returns a single fruit)
+ */
+app.get("/logs/:id", (req, res) => {
+ 
+  Log.findById(req.params.id,(error,foundLogs)=>{
+    //  res.send("Show");
+  res.render('Show',{logs:foundLogs});
+  })
+})
 
 app.listen(PORT,()=>{
 
