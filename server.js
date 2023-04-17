@@ -2,8 +2,8 @@ require("dotenv").config();
 
 const express=require("express");
 const connectToDB=require("./config/database");
-
-
+const Log=require("./models/logs");
+const mongoose=require('mongoose');
 const app=express();
 const PORT=3000;
 
@@ -18,17 +18,22 @@ app.use((req, res, next) => {
   });
   app.use(express.urlencoded({ extended: false }));
 
-  /**
-   * New route /new
-   */
 
-app.get("/new",(req,res)=>{
 
-res.render('New');
-})
+
+
 /**
  * /create route
  */
+  /**
+ * Index Route (return a list of logs)
+ */
+  app.get("/logs", (req, res) => {
+
+    Log.find({},(error,allLogs)=>{
+    res.render('Index',{logs:allLogs})//{} empty objects retrieves all the data from db
+    })
+  });
 
 app.post("/logs",(req,res)=>{
     if (req.body.shipIsBroken === "on") {
@@ -36,8 +41,23 @@ app.post("/logs",(req,res)=>{
       } else {
         req.body.shipIsBroken = false;
       }
-    res.send(req.body);
+    // res.send(req.body);
+    Log.create(req.body, (error,createdLog)=>{
+      // res.send(createdFruit);
+    
+      res.redirect('/logs');//allows the user to navigate to new end point here its /fruits
+    
+    })
 })
+
+  /**
+   * New route logs/new
+   */
+
+  app.get("/logs/new",(req,res)=>{
+
+    res.render('New');
+    })
 
 app.listen(PORT,()=>{
 
