@@ -5,7 +5,7 @@ function Index(props) {
   console.log(logs);
 
   return (
-  <div>
+    <div>
       <nav>
         <a href="/logs/new">Create a New Log</a>
       </nav>
@@ -13,25 +13,18 @@ function Index(props) {
       <ul>
         {logs.map((log, i) => {
           return (
-            
             <li key={log._id}>
-              The <a href={`/logs/${log._id}`}>{log.title}</a> has{" "}
-              {log.entry}{" "}
-              {log.shipIsBroken
-                ? "Ship is broken"
-                : "Ship is not broken"}{" "}
+              The <a href={`/logs/${log._id}`}>{log.title}</a> has {log.entry}{" "}
+              {log.shipIsBroken ? "Ship is broken" : "Ship is not broken"}{" "}
               <a href={`/logs/${log._id}/edit`}>Edit</a>
-              <form
-                method="POST"
-                action={`/logs/${log._id}?_method=DELETE`}
-              >
+              <form method="POST" action={`/logs/${log._id}?_method=DELETE`}>
                 <input type="submit" value="DELETE" />
               </form>
             </li>
           );
         })}
       </ul>
-      </div>
+    </div>
   );
 }
 module.exports = Index;
