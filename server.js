@@ -69,7 +69,7 @@ app.get("/logs/:id/edit",(req,res)=>{
 
   Log.findById(req.params.id,(error,foundLog)=>{
   if(!error){
-  res.render('logs/Edit',{logs:foundLog});
+  res.render('Edit',{logs:foundLog});
   } else{
   res.send({msg:error.message})
   }
@@ -85,8 +85,8 @@ app.get("/logs/:id/edit",(req,res)=>{
     } else {
       req.body.shipIsBroken = false;
     }
-  Log.findByIdAndUpdate(req.params.id,req.body,{new:true},(error,updatedLog)=>{   //{new:true } displays updated data
-  // res.send(updatedFruit);
+  Log.findByIdAndUpdate(req.params.id,req.body,{new:true},(error,updatedLog)=>{   
+  // res.send(updatedLog);
   res.redirect(`/logs/${req.params.id}`)
   })
   

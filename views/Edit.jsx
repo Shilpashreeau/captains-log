@@ -7,9 +7,9 @@ function Edit(props) {
   <div>
         
       <form method="POST" action={`/logs/${logs._id}/?_method=PUT`}>
-        Name: <input type="text" name="name" defaultValue={logs.title} />
+      Title: <input type="text" name="title" defaultValue={logs.title} />
         <br/>
-        Color: <input type="text" name="color"  defaultValue={logs.entry}/>
+        Entry: <input type="text" name="entry"  defaultValue={logs.entry}/>
         <br/>
         Is ship broken:{ logs.shipIsBroken ? 
                 <input type="checkbox" name="shipIsBroken" defaultChecked/> 
