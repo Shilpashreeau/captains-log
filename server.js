@@ -67,20 +67,16 @@ app.post("/logs",(req,res)=>{
 app.get('/logs/seed', (req, res)=>{
   Log.create([
       {
-        title:'grapefruit',
-        entry:'pink',
+        title:'Caribbean',
+        entry:'Runs weekly once',
         shipIsBroken:true
       },
       {
-        title:'grape',
-        entry:'purple',
+        title:'Pirate',
+        entry:'Never runs',
         shipIsBroken:false
       },
-      {
-        title:'avocado',
-        entry:'green',
-        shipIsBroken:true
-      }
+     
   ], (err, data)=>{
       res.redirect('/logs');
   })

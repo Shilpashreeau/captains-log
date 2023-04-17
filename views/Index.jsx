@@ -6,9 +6,9 @@ function Index(props) {
 
   return (
   <div>
-      {/* <nav>
-        <a href="/fruits/new">Create a New Fruit</a>
-      </nav> */}
+      <nav>
+        <a href="/logs/new">Create a New Log</a>
+      </nav>
       <h1>Index Page</h1>
       <ul>
         {logs.map((log, i) => {
@@ -20,13 +20,13 @@ function Index(props) {
               {log.shipIsBroken
                 ? "Ship is broken"
                 : "Ship is not broken"}{" "}
-              {/* <a href={`/fruits/${fruit._id}/edit`}>Edit</a> */}
-              {/* <form
+              <a href={`/logs/${log._id}/edit`}>Edit</a>
+              <form
                 method="POST"
-                action={`/fruits/${fruit._id}?_method=DELETE`}
+                action={`/logs/${log._id}?_method=DELETE`}
               >
                 <input type="submit" value="DELETE" />
-              </form> */}
+              </form>
             </li>
           );
         })}
