@@ -6,6 +6,8 @@ const Log=require("./models/logs");
 const mongoose=require('mongoose');
 const app=express();
 const PORT=3000;
+const methodOverride=require('method-override');
+app.use(methodOverride('_method'));
 
 //*  setting the views
 app.set("view engine", "jsx");
@@ -62,6 +64,33 @@ app.post("/logs",(req,res)=>{
 
     res.render('New');
     })
+    // Return the edit form
+app.get("/logs/:id/edit",(req,res)=>{
+
+  Log.findById(req.params.id,(error,foundLog)=>{
+  if(!error){
+  res.render('logs/Edit',{logs:foundLog});
+  } else{
+  res.send({msg:error.message})
+  }
+  
+  
+  })
+  })
+  
+  //====Handle the edit form data=====
+  app.put('/logs/:id',(req,res)=>{
+    if (req.body.shipIsBroken === "on") {
+      req.body.shipIsBroken = true;
+    } else {
+      req.body.shipIsBroken = false;
+    }
+  Log.findByIdAndUpdate(req.params.id,req.body,{new:true},(error,updatedLog)=>{   //{new:true } displays updated data
+  // res.send(updatedFruit);
+  res.redirect(`/logs/${req.params.id}`)
+  })
+  
+  })
 
     //*Seed Route
 app.get('/logs/seed', (req, res)=>{
@@ -91,6 +120,12 @@ app.get("/logs/:id", (req, res) => {
   res.render('Show',{logs:foundLogs});
   })
 })
+// DELETE log
+app.delete('/logs/:id',(req,res)=>{
+  Log.findByIdAndRemove(req.params.id,(error,deletedLog)=>{
+  res.redirect('/logs');
+  })
+  })
 
 app.listen(PORT,()=>{
 
