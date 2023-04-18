@@ -47,7 +47,7 @@ app.post("/logs", (req, res) => {
   Log.create(req.body, (error, createdLog) => {
     // res.send(createdFruit);
 
-    res.redirect("/logs"); //allows the user to navigate to new end point here its /fruits
+    res.redirect("/logs"); 
   });
 });
 
@@ -80,7 +80,7 @@ app.put("/logs/:id", (req, res) => {
     req.params.id,
     req.body,
     { new: true },
-    (error, updatedLog) => {
+    (error) => {
       // res.send(updatedLog);
       res.redirect(`/logs/${req.params.id}`);
     }

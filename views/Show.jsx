@@ -8,7 +8,7 @@ function Show(props) {
       <p>
         The {logs.title} is {logs.entry}{" "}
         {logs.shipIsBroken ? "Ship is broken" : "Ship is not broken"} at the
-        time {logs.timestamps}
+        time {logs.createdAt.toString()}
       </p>
       <a href="/logs">Go back to logs page</a>
     </div>
